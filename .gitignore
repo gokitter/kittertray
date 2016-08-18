@@ -1,3 +1,4 @@
 /kittertray
 /vendor
 .DS_Store
+/_build/dockerfile/kittertray/kittertray
