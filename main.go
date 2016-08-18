@@ -14,7 +14,7 @@ func main() {
 }
 
 func startHTTP() {
-	//http.HandleFunc("/v1/health", handlers.HealthHandler)
+	http.HandleFunc("/v1/health", handlers.HealthHandler)
 	http.HandleFunc("/v1/meow", handlers.MeowHandler)
 
 	fmt.Println("Listening for connections on port", 8001)
