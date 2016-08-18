@@ -2,3 +2,4 @@
 /vendor
 .DS_Store
 /_build/dockerfile/kittertray/kittertray
+_build/dockerfile/kittertray/static
