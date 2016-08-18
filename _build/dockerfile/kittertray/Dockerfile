@@ -14,5 +14,4 @@ ADD kittertray /kittertray/kittertray
 
 RUN chmod 755 /kittertray/kittertray
 
-ENTRYPOINT ["exec /kittertray/kittertray"]
-CMD []
+CMD ["/kittertray/kittertray"]

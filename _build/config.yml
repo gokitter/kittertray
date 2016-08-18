@@ -12,6 +12,8 @@ docker:
   build_image: 'golang:latest'
   application_docker_file: './dockerfile/kittertray/'
   application_compose_file: './dockercompose/kittertray/docker-compose.yml'
+fetch:
+  enabled: true
 test:
   enabled: true
 build:
@@ -20,9 +22,6 @@ build:
       -
         from: '../kittertray'
         to: './dockerfile/kittertray'
-      -
-        from: './swagger_spec/swagger.yml'
-        to: './dockerfile/kittertray/swagger_spec'
 run:
   consul_loader:
     config_file: './consul_keys.yml'
