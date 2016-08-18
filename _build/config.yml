@@ -1,0 +1,44 @@
+---
+application_name: 'kittertray'
+namespace: 'gokitter/kittertray'
+generator_name: minke-generator-go
+docker_registry:
+  url: 
+  user: 
+  password: 
+  email: 
+  namespace: 
+docker:
+  build_image: 'golang:latest'
+  application_docker_file: './dockerfile/kittertray/'
+  application_compose_file: './dockercompose/kittertray/docker-compose.yml'
+test:
+  enabled: true
+build:
+  post:
+    copy:
+      -
+        from: '../kittertray'
+        to: './dockerfile/kittertray'
+      -
+        from: './swagger_spec/swagger.yml'
+        to: './dockerfile/kittertray/swagger_spec'
+run:
+  consul_loader:
+    config_file: './consul_keys.yml'
+    url:
+      address: consul
+      port: 8500
+      type: bridge
+cucumber:
+  consul_loader:
+    config_file: './consul_keys.yml'
+    url:
+      address: consul
+      port: 8500
+      type: bridge
+  health_check:
+    address: kittertray
+    port: 8001
+    path: /v1/health
+    type: bridge

@@ -1,0 +1,13 @@
+---
+  kittertray:
+    Credentials:
+      mysql:
+        username: root
+        password: my-secret-pw
+    Settings:
+      environment: dev
+      mysql:
+        db_name: kittertray
+      statsd:
+        host: statsd
+        port: 8125
