@@ -9,9 +9,12 @@ EXPOSE 50051
 # Create directory for server files
 RUN mkdir /kittertray
 
+WORKDIR /kittertray
+
 # Add server files
-ADD kittertray /kittertray/kittertray
+COPY kittertray /kittertray/kittertray
+COPY ./static /kittertray/static
 
 RUN chmod 755 /kittertray/kittertray
 
-CMD ["/kittertray/kittertray"]
+CMD ["./kittertray"]

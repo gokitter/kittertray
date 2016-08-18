@@ -22,6 +22,9 @@ build:
       -
         from: '../kittertray'
         to: './dockerfile/kittertray'
+      -
+        from: '../static'
+        to: './dockerfile/kittertray'
 run:
   consul_loader:
     config_file: './consul_keys.yml'

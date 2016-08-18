@@ -2,12 +2,9 @@ package handlers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/gokitter/kitter/client"
-	"github.com/gokitter/kitter/kitter"
-	"google.golang.org/grpc"
 )
 
 type MeowRequest struct {
@@ -17,14 +14,15 @@ type MeowRequest struct {
 func MeowHandler(rw http.ResponseWriter, r *http.Request) {
 	var request MeowRequest
 	decoder := json.NewDecoder(r.Body)
-	decoder.Decode(&request)
+	err := decoder.Decode(&request)
 
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+	if err != nil || request.Meow == "" || len(request.Meow) > 154 {
+		http.Error(rw, "Invalid message length", http.StatusBadRequest)
+		return
 	}
-	defer conn.Close()
 
-	c := kitter.NewKitterClient(conn)
-	client.WriteMessage(c, request.Meow)
+	kc := client.NewKitterClient("0.0.0.0:50051")
+	defer kc.Close()
+
+	kc.WriteMessage(request.Meow)
 }
