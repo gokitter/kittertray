@@ -21,7 +21,7 @@ func MeowHandler(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	kc := client.NewKitterClient("0.0.0.0:50051")
+	kc := clientfactory.Create("0.0.0.0:50051")
 	defer kc.Close()
 
 	kc.WriteMessage(request.Meow)
